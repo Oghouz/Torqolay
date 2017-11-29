@@ -87,5 +87,25 @@ fontSize.on('input', function () {
     chrome.tabs.executeScript(null,{code:command});
 });
 
-
-
+function changeStyle(style)
+{
+    var es = $('*');
+    var el = [];
+    for(var i=0;i<es.length;i++){
+        var tagName = $(es[i]['tagName']);
+        var tn = tagName.prop("tagName");
+        if($.inArray(tn, ["HTML", "HEAD", "META", "SCRIPT", "BODY"]) == -1 ) {
+            //console.log(tagName);
+            el.push(tagName);
+        }
+    }
+    el.forEach(function (element, index) {
+        //console.log(element.text(), '--------------');
+        var search = element.text();
+        if (uyghur.test(search)) {
+            console.log(element.text());
+            element.css(style);
+        }
+        //element.css(style);
+    })
+}
