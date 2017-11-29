@@ -46,6 +46,7 @@ fonts = [
     { "name": "قارا", "value": "UKIJ" }
 ];
 
+// font style
 var fontStyle = $('#fontStyle');
 fonts.forEach(function (element, index) {
     var option = '<li style="font-family: '+element.value+'; text-align: right;"><a id="font-select-'+index+'">'+element.name+'</a></li>';
@@ -62,6 +63,29 @@ function changeFontStyle(index) {
     chrome.tabs.executeScript(null,{code:command});
 }
 
+// font color
+var fontColor = $('#fontColor');
+fontColor.on('input', function () {
+    color = this.value;
+    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.color='"+color+"'; }  } es[i].style.color='"+color+"'; }";
+    chrome.tabs.executeScript(null,{code:command});
+});
+
+// background color
+var bgColor = $('#bgColor');
+bgColor.on('input', function () {
+    color = this.value;
+    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.backgroundColor='"+color+"'; }  } es[i].style.backgroundColor='"+color+"'; }";
+    chrome.tabs.executeScript(null,{code:command});
+});
+
+// font size
+var fontSize = $('#fontSize');
+fontSize.on('input', function () {
+    var size = this.value;
+    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontSize='"+size+"px'; }  } es[i].style.fontSize='"+size+"px'; }";
+    chrome.tabs.executeScript(null,{code:command});
+});
 
 
 
