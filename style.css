@@ -38,3 +38,13 @@ label {
 .popup {
     margin: 10px 20px;
 }
+
+.save {
+    margin: 10px 20px;
+    min-height: 100px;
+}
+
+.list {
+    margin: 10px 20px;
+    min-height: 100px;
+}

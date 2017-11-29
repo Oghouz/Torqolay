@@ -29,10 +29,9 @@
     </div>
 
     <div class="row">
-        <label class="col-md-6">خەت چوڭ-كىچىكلىكى</label>
+        <label class="col-md-6"><span class="label label-info" id="fontSizeCounter"></span> خەت چوڭ-كىچىكلىكى</label>
         <div class="col-md-6">
             <input type="range" id="fontSize" class="form-control" min="8" max="32" step="1">
-
         </div>
     </div>
 
@@ -50,6 +49,41 @@
         </div>
     </div>
 
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button id="listBtn" class="pull-left">تىزىملىك</button>
+            <button id="save" class="">+</button>
+            <button id="remove">X</button>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="save" style="display: none">
+    <div class="row">
+        <button name="backBtn" class="btn-link pull-left"><i class="glyphicon glyphicon-arrow-left"></i>قايتىش</button>
+    </div>
+    <form id="params-form">
+        <div class="form-group">
+            <label>ئىسمى</label>
+            <input type="text" class="form-control" id="paramsName">
+        </div>
+        <button type="submit" class="btn btn-success">تامام</button>
+    </form>
+</div>
+
+<div class="list" style="display: none;">
+    <div class="row">
+        <button name="backBtn" class="btn-link pull-left"><i class="glyphicon glyphicon-arrow-left"></i>قايتىش</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="list-group" id="list-group"></div>
+        </div>
+    </div>
 </div>
 
 
