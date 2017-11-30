@@ -10,15 +10,12 @@ body {
 select {
     direction: rtl;
 }
-
 label {
     font-family: "UKIJ Tuz Basma";
 }
-
 .rtl {
     direction: rtl;
 }
-
 .btn {
     width: 100%;
     text-align: right;
@@ -26,7 +23,6 @@ label {
 .dropdown-menu {
     width: 100%;
 }
-
 .title {
     font-size: 24px;
     font-family: "UKIJ Diwani Tom";
@@ -34,7 +30,14 @@ label {
     color: white;
     padding: 10px;
 }
-
 .popup {
     margin: 10px 20px;
+}
+.save {
+    margin: 10px 20px;
+    min-height: 100px;
+}
+.list {
+    margin: 10px 20px;
+    min-height: 100px;
 }

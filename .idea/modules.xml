@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/chrome_extension.iml" filepath="$PROJECT_DIR$/.idea/chrome_extension.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/torqolay.iml" filepath="$PROJECT_DIR$/.idea/torqolay.iml" />
     </modules>
   </component>
 </project>

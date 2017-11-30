@@ -12,6 +12,8 @@
     "default_title": "تورقولاي"
   },
 
+  "options_page": "options.html",
+
   "permissions": [
     "activeTab",
     "storage"

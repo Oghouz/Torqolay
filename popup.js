@@ -48,64 +48,205 @@ fonts = [
 
 // font style
 var fontStyle = $('#fontStyle');
+var fontSelectedIndex = null;
 fonts.forEach(function (element, index) {
+    fontSelectedIndex = index;
     var option = '<li style="font-family: '+element.value+'; text-align: right;"><a id="font-select-'+index+'">'+element.name+'</a></li>';
-    var li = fontStyle.append(option);
+    fontStyle.append(option);
     var select = $('#font-select-'+index);
     select.on('click', function () {
-        changeFontStyle(index);
+        setFontStyle(fonts[index].value);
     })
 });
 
-function changeFontStyle(index) {
-    var font = fonts[index].value;
-    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontFamily='"+font+"'; }  } es[i].style.fontFamily='"+font+"'; }";
-    chrome.tabs.executeScript(null,{code:command});
-}
-
-// font color
+// font color event
 var fontColor = $('#fontColor');
 fontColor.on('input', function () {
     color = this.value;
-    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.color='"+color+"'; }  } es[i].style.color='"+color+"'; }";
-    chrome.tabs.executeScript(null,{code:command});
+    setFontColor(color);
 });
 
-// background color
+// background color event
 var bgColor = $('#bgColor');
 bgColor.on('input', function () {
     color = this.value;
-    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.backgroundColor='"+color+"'; }  } es[i].style.backgroundColor='"+color+"'; }";
-    chrome.tabs.executeScript(null,{code:command});
+    setBackgroundColor(color);
 });
 
-// font size
+// font size event
 var fontSize = $('#fontSize');
+var fontSizeCounter = $('#fontSizeCounter');
 fontSize.on('input', function () {
     var size = this.value;
-    var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontSize='"+size+"px'; }  } es[i].style.fontSize='"+size+"px'; }";
-    chrome.tabs.executeScript(null,{code:command});
+    fontSizeCounter.text(size);
+    setFontSize(size);
 });
 
-function changeStyle(style)
-{
-    var es = $('*');
-    var el = [];
-    for(var i=0;i<es.length;i++){
-        var tagName = $(es[i]['tagName']);
-        var tn = tagName.prop("tagName");
-        if($.inArray(tn, ["HTML", "HEAD", "META", "SCRIPT", "BODY"]) == -1 ) {
-            //console.log(tagName);
-            el.push(tagName);
-        }
-    }
-    el.forEach(function (element, index) {
-        //console.log(element.text(), '--------------');
-        var search = element.text();
-        if (uyghur.test(search)) {
-            console.log(element.text());
-            element.css(style);
-        }
-        //element.css(style);
-    })
+
+// get params from cookie
+var ck = getCookie('torqolay');
+var listGroup = $('#list-group');
+if (ck) {
+    var params = JSON.parse(ck);
+    params.forEach(function (param) {
+        console.log(param.params);
+        var listGroupItem = document.createElement('a');
+        listGroupItem.href="#";
+        listGroupItem.className = "list-group-item";
+        listGroupItem.textContent = param.name;
+        listGroupItem.addEventListener('click', function() {
+
+            fontColor.val(param.params.fontColor);
+            setFontColor(param.params.fontColor);
+
+            setFontStyle(fonts[param.params.fontStyle]);
+
+            fontSize.val(param.params.fontSize);
+            fontSizeCounter.text(param.params.fontSize);
+            setFontSize(param.params.fontSize);
+
+            bgColor.val(param.params.bgColor);
+            setBackgroundColor(param.params.bgColor);
+
+            $('.list').hide();
+            $('.popup').show();
+        });
+        listGroup.append(listGroupItem);
+    });
 }
+
+
+// load list box
+var listBtn = $('#listBtn');
+listBtn.on('click', function () {
+    $('.popup').hide();
+    $('.list').show();
+
+});
+
+// Save
+var saveBtn = $('#save');
+saveBtn.on('click', function () {
+    $('.popup').hide();
+    $('.save').show();
+
+    var paramForm = $('#params-form');
+    paramForm.submit('click', function (event) {
+        event.preventDefault();
+        var ck = getCookie('torqolay');
+        if (ck) {
+            var loadData = JSON.parse(ck);
+            loadData.push({
+                "name": $('#paramsName').val(),
+                "params": {
+                    "fontStyle": fontSelectedIndex,
+                    "fontColor": fontColor.val(),
+                    "fontSize": fontSize.val(),
+                    "bgColor": bgColor.val()
+                }
+            });
+            document.cookie = "torqolay="+JSON.stringify(loadData);
+        } else {
+            var newData = [
+                {
+                    "name": $('#paramsName').val(),
+                    "params": {
+                        "fontStyle": fontSelectedIndex,
+                        "fontColor": fontColor.val(),
+                        "fontSize": fontSize.val(),
+                        "bgColor": bgColor.val()
+                    }
+                }
+            ];
+            document.cookie = "torqolay="+JSON.stringify(newData);
+        }
+
+        $('.save').hide();
+        $('.popup').show();
+    })
+});
+
+// back button
+var backBtn = $('button[name=backBtn]');
+backBtn.on('click', function () {
+    $('.list').hide();
+    $('.save').hide();
+    $('.popup').show();
+});
+
+// delete cookie
+var removeBtn = $('#remove');
+removeBtn.on('click', function () {
+    removeCookie("torqolay");
+});
+
+/**
+ *  Set font family
+ * @param font
+ */
+function setFontStyle(font) {
+    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontFamily='"+font+"'; }  } es[i].style.fontFamily='"+font+"'; }";
+    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.fontFamily='"+font+"';es[i].style.direction='rtl';}}";
+    chrome.tabs.executeScript(null,{code:command});
+}
+
+/**
+ *  Set font color
+ * @param color
+ */
+function setFontColor(color) {
+    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.color='"+color+"';}}";
+    chrome.tabs.executeScript(null,{code:command});
+}
+
+/**
+ *  Set font size
+ * @param size
+ */
+function setFontSize(size) {
+    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontSize='"+size+"px'; }  } es[i].style.fontSize='"+size+"px'; }";
+    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.fontSize='"+size+"px';}}";
+    chrome.tabs.executeScript(null,{code:command});
+}
+
+/**
+ *  Set background color
+ * @param color
+ */
+function setBackgroundColor(color) {
+    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.backgroundColor='"+color+"'; }  } es[i].style.backgroundColor='"+color+"'; }";
+    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.backgroundColor='"+color+"';}}";
+    chrome.tabs.executeScript(null,{code:command});
+}
+
+/**
+ *  Get cookie by name
+ * @param name
+ * @returns {null}
+ */
+function getCookie(name) {
+    var pair = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    return !!pair ? pair[1] : null;
+}
+
+/**
+ *  Remove cookie by name
+ * @param name
+ */
+function removeCookie(name) {
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
+/**
+ *  Chekc string is Uyghur language
+ * @param text
+ * @returns {boolean}
+ */
+function isUy(text)
+{
+    var regex = /[\u0600-\u06FF]/;
+    return regex.test(text);
+}
+
+//TODO: remove list
+//TODO: max count for list

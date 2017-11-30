@@ -1,0 +1,38 @@
+body {
+    font-family: "UKIJ Ekran";
+    background-color: #ccd2ce;
+}
+
+button  {
+    font-family: "UKIJ Ekran";
+    font-size: 16px;
+}
+
+.panel {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 600px;
+    /*background-color: aliceblue;*/
+}
+
+.panel-title {
+     width: 500px;
+     padding: 10px 20px;
+     color: #444444;
+     background-color: #ddd;
+     background-image: linear-gradient(#E5E5E5, #ffffff);
+    font-size: 24px;
+    color: #0D79D1;
+    text-align: center;
+}
+
+.panel-body {
+    text-align: right;
+    margin-top: 10px;
+    width: 500px;
+    padding: 35px 20px;
+    color: #444444;
+    background-color: #ddd;
+    background-image: linear-gradient(#E5E5E5, #ffffff);
+}
