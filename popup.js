@@ -13,17 +13,17 @@ fonts = [
     { "name": "ئېكران", "value": "UKIJ Ekran" },
     { "name": "ئېلىبە", "value": "UKIJ Elipbe" },
     { "name": "ئېلىبە چەكتىلىك", "value": "UKIJ" },
-    { "name": "ئەسلىيە", "value": "UKIJ" },
-    { "name": "ئەسلىيە چىۋەر", "value": "UKIJ" },
-    { "name": "ئەسلىيە نەقىش", "value": "UKIJ" },
-    { "name": "ئەسلىيە قارا", "value": "UKIJ" },
-    { "name": "ئەسلىيە توم", "value": "UKIJ" },
-    { "name": "ئىمارەت", "value": "UKIJ" },
-    { "name": "ئىنچىكە", "value": "UKIJ" },
-    { "name": "جۇنۇن", "value": "UKIJ" },
-    { "name": "كاۋاك", "value": "UKIJ" },
-    { "name": "كاۋاك 3ئۆلچەم", "value": "UKIJ" },
-    { "name": "كەسمە", "value": "UKIJ" },
+    { "name": "ئەسلىيە", "value": "UKIJ Elsiye" },
+    { "name": "ئەسلىيە چىۋەر", "value": "UKIJ Elsiye Chiwer" },
+    { "name": "ئەسلىيە نەقىش", "value": "UKIJ Esliye Neqish" },
+    { "name": "ئەسلىيە قارا", "value": "UKIJ Esliye Qara" },
+    { "name": "ئەسلىيە توم", "value": "UKIJ Esliye Tom" },
+    { "name": "ئىمارەت", "value": "UKIJ Imaret" },
+    { "name": "ئىنچىكە", "value": "UKIJ Inchike" },
+    { "name": "جۇنۇن", "value": "UKIJ Junun" },
+    { "name": "كاۋاك", "value": "UKIJ Kawak" },
+    { "name": "كاۋاك 3ئۆلچەم", "value": "UKIJ Kawak 3D" },
+    { "name": "كەسمە", "value": "UKIJ " },
     { "name": "كەسمە تۈز", "value": "UKIJ" },
     { "name": "كۇفى 3ئۆلچەم", "value": "UKIJ" },
     { "name": "كۇفى چىۋەر", "value": "UKIJ" },
@@ -46,6 +46,10 @@ fonts = [
     { "name": "قارا", "value": "UKIJ" }
 ];
 
+
+// load params
+//loadParams();
+
 // font style
 var fontStyle = $('#fontStyle');
 var fontSelectedIndex = null;
@@ -59,6 +63,24 @@ fonts.forEach(function (element, index) {
     })
 });
 
+// font size event
+var fontSize = $('#fontSize');
+var fontSizeCounter = $('#fontSizeCounter');
+fontSize.on('input', function () {
+    var size = this.value;
+    fontSizeCounter.text(size);
+    setFontSize(size);
+});
+
+// div direction
+var direction = $('#direction');
+direction.change(function () {
+    if (this.checked) {
+        setDirection('rtl');
+    } else {
+        setDirection('');
+    }
+});
 // font color event
 var fontColor = $('#fontColor');
 fontColor.on('input', function () {
@@ -73,13 +95,19 @@ bgColor.on('input', function () {
     setBackgroundColor(color);
 });
 
-// font size event
-var fontSize = $('#fontSize');
-var fontSizeCounter = $('#fontSizeCounter');
-fontSize.on('input', function () {
-    var size = this.value;
-    fontSizeCounter.text(size);
-    setFontSize(size);
+// UY -> ULY convert
+$('#uytouly').on('click', function () {
+    // chrome.tabs.executeScript(null, {
+    //     file: 'convert.js'
+    // });
+});
+
+
+// ULY -> UY convert
+$('#ulytouy').on('click', function () {
+    chrome.tabs.executeScript(null, {
+        file: 'convert.js'
+    });
 });
 
 
@@ -185,9 +213,8 @@ removeBtn.on('click', function () {
  * @param font
  */
 function setFontStyle(font) {
-    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontFamily='"+font+"'; }  } es[i].style.fontFamily='"+font+"'; }";
-    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.fontFamily='"+font+"';es[i].style.direction='rtl';}}";
-    chrome.tabs.executeScript(null,{code:command});
+    var code = setStyle('fontFamily', font);
+    chrome.tabs.executeScript(null,{code:code});
 }
 
 /**
@@ -195,8 +222,8 @@ function setFontStyle(font) {
  * @param color
  */
 function setFontColor(color) {
-    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.color='"+color+"';}}";
-    chrome.tabs.executeScript(null,{code:command});
+    var code = setStyle('color', color);
+    chrome.tabs.executeScript(null,{code:code});
 }
 
 /**
@@ -204,9 +231,14 @@ function setFontColor(color) {
  * @param size
  */
 function setFontSize(size) {
-    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.fontSize='"+size+"px'; }  } es[i].style.fontSize='"+size+"px'; }";
-    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.fontSize='"+size+"px';}}";
-    chrome.tabs.executeScript(null,{code:command});
+    var code = setStyle('fontSize', size+'px');
+    chrome.tabs.executeScript(null,{code:code});
+}
+
+function setDirection(direction) {
+    var code = setStyle('direction', direction);
+    chrome.tabs.executeScript(null,{code:code});
+
 }
 
 /**
@@ -214,9 +246,18 @@ function setFontSize(size) {
  * @param color
  */
 function setBackgroundColor(color) {
-    // var command = "var es = document.all; for(var i=0;i<es.length;i++){ if((es[i]['tagName']=='IFRAME')||(es[i]['tagName']=='FRAME')){ var w=es[i].contentWindow; var wes = w.document.all; for(var j=0;j<wes.length;j++){ wes[j].style.backgroundColor='"+color+"'; }  } es[i].style.backgroundColor='"+color+"'; }";
-    var command = "var regex=/[\u0600-\u06FF]/;var es = document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++) {var search = es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)) {es[i].style.backgroundColor='"+color+"';}}";
-    chrome.tabs.executeScript(null,{code:command});
+    var code = setStyle('backgroundColor', color);
+    chrome.tabs.executeScript(null,{code:code});
+}
+
+/**
+ *  reload all element in the current tabs
+ * @param style
+ * @param value
+ * @returns {string}
+ */
+function setStyle(style, value) {
+    return "var regex=/[\u0600-\u06FF]/;var es=document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++){var search=es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)){es[i].style."+style+"='"+value+"';}}";
 }
 
 /**
@@ -247,6 +288,16 @@ function isUy(text)
     var regex = /[\u0600-\u06FF]/;
     return regex.test(text);
 }
+
+function loadParams() {
+    chrome.storage.sync.get("params", function (item) {
+        if (item.params['global-select']) {
+
+        }
+    });
+}
+
+
 
 //TODO: remove list
 //TODO: max count for list

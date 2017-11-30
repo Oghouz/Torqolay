@@ -18,6 +18,20 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div>
+                <button class="btn-sm" id="uytouly">ئۇي <i class="glyphicon glyphicon-arrow-right"></i> ULY</button>
+                <button class="btn-sm" id="ulytouy">ULY <i class="glyphicon glyphicon-arrow-right"></i>ئۇي </button>
+            </div>
+            <div class="pull-right">
+                <button id="listBtn" class="btn-link pull-left"><i class="glyphicon glyphicon-th-list"></i></button>
+                <button id="save" class="btn-link"><i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <div class="dropdown rtl">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     خەت نۇسقىسى<span class="caret pull-left"></span>
@@ -36,6 +50,13 @@
     </div>
 
     <div class="row">
+        <label class="col-md-6">يۆلىنىشنى ئۆزگەرتىش</label>
+        <div class="col-md-6">
+            <input type="checkbox" name="direction" id="direction">
+        </div>
+    </div>
+
+    <div class="row">
         <label class="col-md-6">خەت رەڭگى</label>
         <div class="col-md-6">
             <input type="color" name="fontColor" id="fontColor" value="#559EE2" class="form-control">
@@ -50,15 +71,11 @@
     </div>
 
     <hr>
-
     <div class="row">
         <div class="col-md-12">
-            <button id="listBtn" class="pull-left">تىزىملىك</button>
-            <button id="save" class="">+</button>
-            <button id="remove">X</button>
+            <a href="#"  class="btn-link pull-left">تەڭشەك</a>
         </div>
     </div>
-
 
 </div>
 
@@ -86,6 +103,7 @@
     </div>
 </div>
 
+<input type="hidden" name="globalSelect" id="globalSelect" value="false">
 
 <script src="popup.js" type="text/javascript"></script>
 </body>

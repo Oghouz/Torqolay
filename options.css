@@ -17,14 +17,13 @@ button  {
 }
 
 .panel-title {
-     width: 500px;
-     padding: 10px 20px;
-     color: #444444;
-     background-color: #ddd;
-     background-image: linear-gradient(#E5E5E5, #ffffff);
+    width: 500px;
+    padding: 10px 20px;
+    background-color: #ddd;
+    background-image: linear-gradient(#E5E5E5, #ffffff);
     font-size: 24px;
-    color: #0D79D1;
     text-align: center;
+    box-shadow: 1px 1px 10px #b7b7b7;
 }
 
 .panel-body {
@@ -35,4 +34,10 @@ button  {
     color: #444444;
     background-color: #ddd;
     background-image: linear-gradient(#E5E5E5, #ffffff);
+    box-shadow: 1px 1px 10px #b7b7b7;
+}
+
+.status {
+    padding: 20px;
+    background-color: #b6d2b4;
 }
