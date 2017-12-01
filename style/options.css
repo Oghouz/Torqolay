@@ -1,0 +1,48 @@
+@font-face {
+    font-family: UKIJ Tuz;
+    src: url('../fonts/UKIJTuz.ttf');
+}
+
+body {
+    font-family: "UKIJ Tuz";
+    background-color: #ccd2ce;
+    font-size: 18px;
+}
+
+button  {
+    font-size: 16px;
+    font-family: "UKIJ Tuz";
+}
+
+.panel {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 600px;
+}
+
+.panel-title {
+    width: 500px;
+    padding: 10px 20px;
+    background-color: #ddd;
+    background-image: linear-gradient(#E5E5E5, #ffffff);
+    font-size: 24px;
+    text-align: center;
+    box-shadow: 1px 1px 10px #b7b7b7;
+}
+
+.panel-body {
+    text-align: right;
+    margin-top: 10px;
+    width: 500px;
+    padding: 35px 20px;
+    color: #444444;
+    background-color: #ddd;
+    background-image: linear-gradient(#E5E5E5, #ffffff);
+    box-shadow: 1px 1px 10px #b7b7b7;
+}
+
+.status {
+    padding: 20px;
+    background-color: #b6d2b4;
+}

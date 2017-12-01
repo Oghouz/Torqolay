@@ -224,6 +224,7 @@ for(var i=0;i<es.length;i++) {
 
     if(es[i]['tagName'] !='SCRIPT') {
 
+        console.log('test');
         if (es[i].children.length < 1) {
             e.push(es[i]);
         }

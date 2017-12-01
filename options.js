@@ -1,7 +1,8 @@
 /**
- * Created by Mardan MEMET on 30/11/2017.
+ * Created by Mardan MEMET on 28/11/2017.
+ * mardan828@gmail.com
+ * GNU General Public License v3.0
  */
-
 
 var select = document.getElementsByName("select");
 var saveBtn = document.getElementById("save");

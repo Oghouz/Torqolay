@@ -1,49 +1,19 @@
 /**
  * Created by Mardan MEMET on 28/11/2017.
+ * mardan828@gmail.com
+ * GNU General Public License v3.0
  */
 
 fonts = [
-    { "name": "باسما", "value": "UKIJ Basma" },
-    { "name": "بوم", "value": "UKIJ Bom" },
-    { "name": "چېچەك", "value": "UKIJ Chechek" },
-    { "name": "چىۋەر كەسمە", "value": "UKIJ Chiwer Kesme" },
-    { "name": "دىۋانى", "value": "UKIJ Diwani" },
-    { "name": "دىۋانى توم", "value": "UKIJ Diwani Tom" },
-    { "name": "دىۋانى يانتۇ نورمال", "value": "UKIJ" },
-    { "name": "ئېكران", "value": "UKIJ Ekran" },
-    { "name": "ئېلىبە", "value": "UKIJ Elipbe" },
-    { "name": "ئېلىبە چەكتىلىك", "value": "UKIJ" },
-    { "name": "ئەسلىيە", "value": "UKIJ Elsiye" },
-    { "name": "ئەسلىيە چىۋەر", "value": "UKIJ Elsiye Chiwer" },
-    { "name": "ئەسلىيە نەقىش", "value": "UKIJ Esliye Neqish" },
-    { "name": "ئەسلىيە قارا", "value": "UKIJ Esliye Qara" },
-    { "name": "ئەسلىيە توم", "value": "UKIJ Esliye Tom" },
-    { "name": "ئىمارەت", "value": "UKIJ Imaret" },
-    { "name": "ئىنچىكە", "value": "UKIJ Inchike" },
-    { "name": "جۇنۇن", "value": "UKIJ Junun" },
-    { "name": "كاۋاك", "value": "UKIJ Kawak" },
-    { "name": "كاۋاك 3ئۆلچەم", "value": "UKIJ Kawak 3D" },
-    { "name": "كەسمە", "value": "UKIJ " },
-    { "name": "كەسمە تۈز", "value": "UKIJ" },
-    { "name": "كۇفى 3ئۆلچەم", "value": "UKIJ" },
-    { "name": "كۇفى چىۋەر", "value": "UKIJ" },
-    { "name": "كۇفى گۈل", "value": "UKIJ" },
-    { "name": "كۇفى كاۋاك", "value": "UKIJ" },
-    { "name": "كۇفى نورمال", "value": "UKIJ" },
-    { "name": "كۇفى تار", "value": "UKIJ" },
-    { "name": "كۇفى ئۇز", "value": "UKIJ" },
-    { "name": "كۇفى ياي", "value": "UKIJ" },
-    { "name": "كۇفى يوللۇق", "value": "UKIJ" },
-    { "name": "مەجنۇن نورمال", "value": "UKIJ" },
-    { "name": "مەجنۇنتال", "value": "UKIJ" },
-    { "name": "مەردانە", "value": "UKIJ" },
-    { "name": "قوي قەلەم", "value": "UKIJ" },
-    { "name": "ناسق", "value": "UKIJ" },
-    { "name": "ناسق زىلۋا", "value": "UKIJ" },
-    { "name": "ئورقۇن باسما", "value": "UKIJ" },
-    { "name": "ئورقۇن يازما", "value": "UKIJ" },
-    { "name": "ئورخۇن", "value": "UKIJ" },
-    { "name": "قارا", "value": "UKIJ" }
+    { "name": "تۈز", "value": "UKIJ Tuz", "file": "UKIJTuz.ttf" },
+    { "name": "تۈز تور", "value": "UKIJ Tuz Tor", "file": "UKIJTzTr.ttf" },
+    { "name": "تۈز باسما", "value": "UKIJ Tuz Basma", "file": "UKIJTuzB.ttf" },
+    { "name": "تۈز كىتاب", "value": "UKIJ Tuz Kitab", "file": "UKIJTuzK.ttf" },
+    { "name": "تۈز قارا", "value": "UKIJ Tuz Qara", "file": "UKIJTuzQ.ttf" },
+    { "name": "تۈز ژورنال", "value": "UKIJ Tuz Jurnal", "file": "" },
+    { "name": "ئېكران", "value": "UKIJ Ekran", "file": "UKIJEkran.ttf" },
+    { "name": "باسما", "value": "UKIJ Basma", "file": "UKIJBasma.ttf" },
+    { "name": "زىلۋا", "value": "UKIJ Zilwa", "file": "UKIJZilwa.ttf" }
 ];
 
 
@@ -55,11 +25,11 @@ var fontStyle = $('#fontStyle');
 var fontSelectedIndex = null;
 fonts.forEach(function (element, index) {
     fontSelectedIndex = index;
-    var option = '<li style="font-family: '+element.value+'; text-align: right;"><a id="font-select-'+index+'">'+element.name+'</a></li>';
+    var option = '<li style="font-family: '+element.value+'; text-align: right;cursor: pointer;"><a id="font-select-'+index+'">'+element.name+'</a></li>';
     fontStyle.append(option);
     var select = $('#font-select-'+index);
     select.on('click', function () {
-        setFontStyle(fonts[index].value);
+        setFontStyle(fonts[index]);
     })
 });
 
@@ -213,7 +183,8 @@ removeBtn.on('click', function () {
  * @param font
  */
 function setFontStyle(font) {
-    var code = setStyle('fontFamily', font);
+    var code = setStyle('fontFamily', font.value);
+        code+= setHeadStyle(font.value, font.file);
     chrome.tabs.executeScript(null,{code:code});
 }
 
@@ -261,6 +232,20 @@ function setStyle(style, value) {
 }
 
 /**
+ *  generate head style for import font
+ * @param fontName
+ * @param fileName
+ * @returns {string}
+ */
+function setHeadStyle(fontName, fileName) {
+    var file = "chrome-extension://feekbgjlnbmihodgdomphfgiakdkfbfo/fonts/"+fileName;
+    return 'var css="@font-face {font-family: '+fontName+';src: url('+file+');}";'+
+        'var head = document.head;var style = document.createElement("style");'+
+        'if(style.styleSheet) {style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}head.appendChild(style);';
+}
+
+
+/**
  *  Get cookie by name
  * @param name
  * @returns {null}
@@ -297,10 +282,6 @@ function loadParams() {
     });
 }
 
-/**
- *  ULY to UY Convert
- * @type {Array}
- */
 
 
 //TODO: remove list

@@ -1,0 +1,85 @@
+@font-face {
+    font-family: UKIJ Ekran;
+    src: url('../fonts/UKIJEkran.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz;
+    src: url('../fonts/UKIJTuz.ttf');
+}
+@font-face {
+    font-family: UKIJ Tor;
+    src: url('../fonts/UKIJTor.ttf');
+}
+@font-face {
+    font-family: UKIJ Basma;
+    src: url('../fonts/UKIJBasma.ttf');
+}
+@font-face {
+    font-family: UKIJ Zilwa;
+    src: url('../fonts/UKIJZilwa.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Basma;
+    src: url('../fonts/UKIJTuzB.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Basma;
+    src: url('../fonts/UKIJTuzB.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Kitab;
+    src: url('../fonts/UKIJTuzK.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Qara;
+    src: url('../fonts/UKIJTuzQ.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Tor;
+    src: url('../fonts/UKIJTzTr.ttf');
+}
+@font-face {
+    font-family: UKIJ Tuz Journal;
+    src: url('../fonts/UKIJTuzG.ttf');
+}
+
+body {
+    width: 220px;
+    height: 100%;
+    min-height: 300px;
+    text-align: right;
+    font-size: 14px;
+    font-family: "UKIJ Tuz";
+}
+
+select {
+    direction: rtl;
+}
+
+.rtl {
+    direction: rtl;
+}
+.btn {
+    width: 100%;
+    text-align: right;
+}
+.dropdown-menu {
+    width: 100%;
+}
+.title {
+    font-size: 24px;
+    background-color: #0D79D1;
+    color: white;
+    padding: 10px;
+}
+.popup {
+    margin: 10px 20px;
+}
+.save {
+    margin: 10px 20px;
+    min-height: 100px;
+}
+.list {
+    margin: 10px 20px;
+    min-height: 100px;
+}
