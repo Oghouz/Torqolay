@@ -294,6 +294,10 @@ function loadParams() {
     });
 }
 
+/**
+ *  ULY to UY Convert
+ * @type {Array}
+ */
 
 var km = new Array ( 128 ); // keymap
 var cm = new Array ( 256 ); // charmap
