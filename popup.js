@@ -18,6 +18,7 @@ tq = {
     fontSelectedIndex: null,
 
     init: function () {
+        tq.mouseSelect();
         tq.setPage();
         tq.bindEvents();
     },
@@ -34,7 +35,13 @@ tq = {
         });
     },
 
-    bindEvents: function () {
+    mouseSelect: function() {
+        chrome.tabs.executeScript(null, {
+            file: 'js/selector.js'
+        });
+    },
+
+    bindEvents: function() {
 
         // UY -> ULY convert
         $('#uytouly').on('click', function () {
@@ -115,8 +122,8 @@ tq = {
     },
 
     setStyle: function(style, value) {
-        var global = tq.getGlobalSelect();
-        if (global) {
+        var params = tq.getGlobalSelect();
+        if (params.globalSelect) {
             return "var es=document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++){var search=es[i].innerText;if(es[i]['tagName'] !='SCRIPT'){es[i].style."+style+"='"+value+"';}}";
         }
         return "var regex=/[\u0600-\u06FF]/;var es=document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++){var search=es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)){es[i].style."+style+"='"+value+"';}}";
@@ -136,8 +143,8 @@ tq = {
 
     getGlobalSelect: function() {
         var param = localStorage.getItem("params");
-        param = JSON.parse(param);
-        return param.globalSelect;
+        if (param === null) return false;
+        return JSON.parse(param);
     }
 
 };

@@ -5,32 +5,46 @@
 
 var select = document.getElementsByName("select");
 var saveBtn = document.getElementById("save");
-var global = false;
+var mouseSelect = document.getElementById("mouseSelect");
+
+var params = {
+    "globalSelect": false,
+    "mouseSelect": false
+};
 
 setParams();
 getParams();
 //restoreOptions();
 //saveOptions();
 
+
+
 function setParams() {
     saveBtn.addEventListener('click', function () {
         if (select[0].checked) {
-            global = true;
+            params.globalSelect = true;
         }
-        var params = {
-            "globalSelect": global,
-        };
         localStorage.setItem('params', JSON.stringify(params));
     });
+
+    mouseSelect.addEventListener("change", function () {
+        if (this.checked) {
+            params.mouseSelect = true;
+        }
+    })
 }
 
 function getParams() {
 
     var params = localStorage.getItem('params');
     params = JSON.parse(params);
-    if (params.globalSelect == true) {
+    if (params && params.globalSelect == true) {
         select[0].checked = true;
     }
+    if (params && params.mouseSelect == true) {
+        mouseSelect.checked = true;
+    }
+
 
 
 }
