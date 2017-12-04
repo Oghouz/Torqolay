@@ -10,7 +10,7 @@ Not available for **Firefox**,
 
 ## Usage
 
-* Click on the <img src="icon.png" alt="icon"> icon to open Options.
+* Click on the <img src="icon.png" alt="Torqolay" width="28"> icon to open Options.
 * Try & enjoy!
 
 ## DEMO
