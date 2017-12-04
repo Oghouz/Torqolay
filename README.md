@@ -1,4 +1,4 @@
-# <img src="icon.png" alt="icon"> Torqolay
+# <img src="icon.png" alt="Torqolay" width="26">> Torqolay
 -------------------------------------
 Google Chrome extension
 
@@ -10,7 +10,7 @@ Not available for **Firefox**,
 
 ## Usage
 
-* Click on the <img src="icon.png" alt="Torqolay" width="28"> icon to open Options.
+* Click on the <img src="icon.png" alt="Torqolay" width="26"> icon to open Options.
 * Try & enjoy!
 
 ## DEMO
