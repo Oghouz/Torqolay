@@ -51,11 +51,16 @@ body {
     font-size: 14px;
     font-family: "UKIJ Tuz";
 }
-
+label {
+    margin-left: 20px;
+    margin-right: 10px;
+}
 select {
     direction: rtl;
 }
-
+strong {
+    font-size: 16px;
+}
 .rtl {
     direction: rtl;
 }

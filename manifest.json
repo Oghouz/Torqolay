@@ -3,6 +3,7 @@
   "name": "Torqolay",
   "description": "This extension allows the user change website font-style, font color, background color etc",
   "version": "1.0",
+  "author": "Mardan Memet",
   "icons": { "128": "icon.png" },
 
   "browser_action": {

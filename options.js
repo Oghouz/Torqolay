@@ -1,6 +1,5 @@
 /**
- * Created by Mardan MEMET on 28/11/2017.
- * mardan828@gmail.com
+ * Created by Mardan MEMET (mardan828@gmail.com) on 28/11/2017.
  * GNU General Public License v3.0
  */
 
@@ -8,10 +7,36 @@ var select = document.getElementsByName("select");
 var saveBtn = document.getElementById("save");
 var global = false;
 
-loadOptions();
-saveOptions();
+setParams();
+getParams();
+//restoreOptions();
+//saveOptions();
 
-function loadOptions() {
+function setParams() {
+    saveBtn.addEventListener('click', function () {
+        if (select[0].checked) {
+            global = true;
+        }
+        var params = {
+            "globalSelect": global,
+        };
+        localStorage.setItem('params', JSON.stringify(params));
+    });
+}
+
+function getParams() {
+
+    var params = localStorage.getItem('params');
+    params = JSON.parse(params);
+    if (params.globalSelect == true) {
+        select[0].checked = true;
+    }
+
+
+}
+
+
+function restoreOptions() {
     chrome.storage.sync.get({
         params: {
             "global-select": global

@@ -19,8 +19,8 @@
     <div class="row">
         <div class="col-md-12">
             <div>
-                <button class="btn-sm" id="uytouly">ئۇي <i class="glyphicon glyphicon-arrow-right"></i> ULY</button>
-                <button class="btn-sm" id="ulytouy">ULY <i class="glyphicon glyphicon-arrow-right"></i>ئۇي </button>
+                <button class="btn-sm" id="uytouly"><strong>ئۇي</strong> <i class="glyphicon glyphicon-arrow-right"></i> ULY</button>
+                <button class="btn-sm" id="ulytouy">ULY <i class="glyphicon glyphicon-arrow-right"></i> <strong>ئۇي</strong></button>
             </div>
             <!--<div class="pull-right">-->
                 <!--<button id="listBtn" class="btn-link pull-left"><i class="glyphicon glyphicon-th-list"></i></button>-->
@@ -50,30 +50,31 @@
     </div>
 
     <div class="row">
-        <label class="col-md-6">يۆلىنىشنى ئۆزگەرتىش</label>
-        <div class="col-md-6">
+        <div class="form-group">
+            <input type="color" name="fontColor" id="fontColor" value="#559EE2">
+            <label for="fontColor">خەت رەڭگى</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <input type="color" name="bgColor" id="bgColor" value="#559EE2">
+            <label for="bgColor">تەگلىك رەڭگى</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-inline">
             <input type="checkbox" name="direction" id="direction">
-        </div>
-    </div>
-
-    <div class="row">
-        <label class="col-md-6">خەت رەڭگى</label>
-        <div class="col-md-6">
-            <input type="color" name="fontColor" id="fontColor" value="#559EE2" class="form-control">
-        </div>
-    </div>
-
-    <div class="row">
-        <label class="col-md-6">تەگلىك رەڭگى</label>
-        <div class="col-md-6">
-            <input type="color" name="bgColor" id="bgColor" value="#559EE2" class="form-control">
+            <label for="direction">ئوڭدىن سولغا</label>
         </div>
     </div>
 
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <a href="/options.html" target="_blank"  class="btn-link pull-left">تەڭشەك</a>
+            <a href="/options.html" target="_blank"  class="btn-link pull-left" title="تەڭشەك">تەڭشەك</a>
+            <a href="#" title="يېڭىلاش" class="btn-link" id="refresh"><i class="glyphicon glyphicon-refresh"></i></a>
         </div>
     </div>
 
