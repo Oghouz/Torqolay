@@ -1,4 +1,4 @@
-# <img src="icon.png" alt="Torqolay" width="26">> Torqolay
+# <img src="icon.png" alt="Torqolay" width="26"> Torqolay
 -------------------------------------
 Google Chrome extension
 
