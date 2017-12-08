@@ -12,11 +12,12 @@ var params = {
     "mouseSelect": false
 };
 
+// version info
+var manifestData = chrome.runtime.getManifest();
+document.getElementById('version').textContent = "version " + manifestData.version;
+
 setParams();
 getParams();
-//restoreOptions();
-//saveOptions();
-
 
 
 function setParams() {
@@ -44,8 +45,6 @@ function getParams() {
     if (params && params.mouseSelect == true) {
         mouseSelect.checked = true;
     }
-
-
 
 }
 

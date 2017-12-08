@@ -17,136 +17,139 @@ tq = {
     ],
     fontSelectedIndex: null,
 
-    init: function () {
-        tq.mouseSelect();
-        tq.setPage();
-        tq.bindEvents();
+    init: () => {
+        tq.mouseSelect()
+        tq.setPage()
+        tq.bindEvents()
     },
     
-    setPage: function () {
+    setPage: () => {
 
-        tq.fonts.forEach(function (element, index) {
-            var option = '<li style="font-family: '+element.value+'; text-align: right;cursor: pointer;"><a id="font-select-'+index+'">'+element.name+'</a></li>';
-            $('#fontStyle').append(option);
-            var select = $('#font-select-'+index);
-            select.on('click', function () {
-                tq.setFontStyle(tq.fonts[index]);
+        tq.fonts.forEach((element, index) => {
+            var option = '<li style="font-family: '+element.value+' text-align: rightcursor: pointer"><a id="font-select-'+index+'">'+element.name+'</a></li>'
+            $('#fontStyle').append(option)
+            var select = $('#font-select-'+index)
+            select.on('click', () => {
+                tq.setFontStyle(tq.fonts[index])
             })
-        });
+        })
     },
 
-    mouseSelect: function() {
-        chrome.tabs.executeScript(null, {
-            file: 'js/selector.js'
-        });
+    mouseSelect: () => {
+        var params = tq.getGlobalSelect()
+        if (params.mouseSelect) {
+            chrome.tabs.executeScript(null, {
+                file: 'js/selector.js'
+            })
+        }
     },
 
-    bindEvents: function() {
+    bindEvents: () => {
 
         // UY -> ULY convert
-        $('#uytouly').on('click', function () {
+        $('#uytouly').on('click', () => {
             chrome.tabs.executeScript(null, {
                 file: 'js/uy2uly.js'
-            });
-        });
+            })
+        })
 
         // ULY -> UY convert event
-        $('#ulytouy').on('click', function () {
+        $('#ulytouy').on('click', () => {
             chrome.tabs.executeScript(null, {
                 file: 'js/uly2uy.js'
-            });
-        });
+            })
+        })
 
         // font size
-        var fontSize = $('#fontSize');
-        var fontSizeCounter = $('#fontSizeCounter');
-        fontSize.on('input', function () {
-            var size = this.value;
-            fontSizeCounter.text(size);
-            tq.setFontSize(size);
-        });
+        var fontSize = $('#fontSize')
+        var fontSizeCounter = $('#fontSizeCounter')
+        fontSize.on('input', () => {
+            var size = this.value
+            fontSizeCounter.text(size)
+            tq.setFontSize(size)
+        })
 
         // text direction
-        $('#direction').change(function () {
+        $('#direction').change(() => {
             if (this.checked) {
-                tq.setDirection('rtl');
+                tq.setDirection('rtl')
             } else {
-                tq.setDirection('');
+                tq.setDirection('')
             }
-        });
+        })
 
         // font color
-        $('#fontColor').on('input', function () {
-            color = this.value;
-            tq.setFontColor(color);
-        });
+        $('#fontColor').on('input', () => {
+            color = this.value
+            tq.setFontColor(color)
+        })
 
         // background color
-        $('#bgColor').on('input', function () {
-            color = this.value;
-            tq.setBackgroundColor(color);
-        });
+        $('#bgColor').on('input', () => {
+            color = this.value
+            tq.setBackgroundColor(color)
+        })
 
         // refresh page
-        $('#refresh').on('click', function () {
-            chrome.tabs.executeScript(null, {code: "window.location.reload();"});
-        });
+        $('#refresh').on('click', () => {
+            chrome.tabs.executeScript(null, {code: "window.location.reload()"})
+        })
         
 
     },
     
-    setFontStyle: function(font) {
-        var code = tq.setStyle('fontFamily', font.value);
-        code+= tq.setHeadStyle(font.value, font.file);
-        chrome.tabs.executeScript(null,{code:code});
+    setFontStyle: (font) => {
+        var code = tq.setStyle('fontFamily', font.value)
+        code+= tq.setHeadStyle(font.value, font.file)
+        chrome.tabs.executeScript(null,{code:code})
     },
     
-    setFontSize: function(size) {
-        var code = tq.setStyle('fontSize', size+'px');
-        chrome.tabs.executeScript(null,{code:code});
+    setFontSize: (size) => {
+        var code = tq.setStyle('fontSize', size+'px')
+        chrome.tabs.executeScript(null,{code:code})
     },
 
-    setDirection: function(direction) {
-        var code = tq.setStyle('direction', direction);
-        chrome.tabs.executeScript(null,{code:code});
+    setDirection: (direction) => {
+        var code = tq.setStyle('direction', direction)
+        chrome.tabs.executeScript(null,{code:code})
     },
 
-    setFontColor: function(color) {
-        var code = tq.setStyle('color', color);
-        chrome.tabs.executeScript(null,{code:code});
+    setFontColor: (color) => {
+        var code = tq.setStyle('color', color)
+        chrome.tabs.executeScript(null,{code:code})
     },
 
-    setBackgroundColor: function(color) {
-        var code = tq.setStyle('backgroundColor', color);
-        chrome.tabs.executeScript(null,{code:code});
+    setBackgroundColor: (color) => {
+        var code = tq.setStyle('backgroundColor', color)
+        chrome.tabs.executeScript(null,{code:code})
     },
 
-    setStyle: function(style, value) {
-        var params = tq.getGlobalSelect();
+    setStyle: (style, value) => {
+        var params = tq.getGlobalSelect()
         if (params.globalSelect) {
-            return "var es=document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++){var search=es[i].innerText;if(es[i]['tagName'] !='SCRIPT'){es[i].style."+style+"='"+value+"';}}";
+            return "var es=document.body.getElementsByTagName('*')for(var i=0i<es.lengthi++){var search=es[i].innerTextif(es[i]['tagName'] !='SCRIPT'){es[i].style."+style+"='"+value+"'}}"
         }
-        return "var regex=/[\u0600-\u06FF]/;var es=document.body.getElementsByTagName('*');for(var i=0;i<es.length;i++){var search=es[i].innerText;if(es[i]['tagName'] !='SCRIPT' && regex.test(search)){es[i].style."+style+"='"+value+"';}}";
+        return "var regex=/[\u0600-\u06FF]/var es=document.body.getElementsByTagName('*')for(var i=0i<es.lengthi++){var search=es[i].innerTextif(es[i]['tagName'] !='SCRIPT' && regex.test(search)){es[i].style."+style+"='"+value+"'}}"
     },
 
-    setHeadStyle: function(fontName, fileName) {
-        var file = "chrome-extension://feekbgjlnbmihodgdomphfgiakdkfbfo/fonts/"+fileName;
-        return 'var css="@font-face {font-family: '+fontName+';src: url('+file+');}";'+
-            'var head = document.head;var style = document.createElement("style");'+
-            'if(style.styleSheet) {style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}head.appendChild(style);';
+    setHeadStyle: (fontName, fileName) => {
+        var file = "chrome-extension://feekbgjlnbmihodgdomphfgiakdkfbfo/fonts/"+fileName
+        return 'var css="@font-face {font-family: '+fontName+'src: url('+file+')}"'+
+            'var head = document.headvar style = document.createElement("style")'+
+            'if(style.styleSheet) {style.styleSheet.cssText=css}else{style.appendChild(document.createTextNode(css))}head.appendChild(style)'
     },
 
-    isUy: function (text) {
-        var regex = /[\u0600-\u06FF]/;
-        return regex.test(text);
+    isUy: (text) => {
+        var regex = /[\u0600-\u06FF]/
+        return regex.test(text)
     },
 
-    getGlobalSelect: function() {
-        var param = localStorage.getItem("params");
-        if (param === null) return false;
-        return JSON.parse(param);
+    getGlobalSelect: () => {
+        var param = localStorage.getItem("params")
+        if (param === null) return false
+        return JSON.parse(param)
     }
 
-};
+}
 
-$(tq.init);
+$(tq.init)

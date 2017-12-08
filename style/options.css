@@ -46,3 +46,9 @@ button  {
     padding: 20px;
     background-color: #b6d2b4;
 }
+
+.version {
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+}

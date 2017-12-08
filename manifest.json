@@ -2,8 +2,8 @@
   "manifest_version": 2,
   "name": "Torqolay",
   "description": "This extension allows the user change website font-style, font color, background color etc",
-  "version": "1.0",
-  "author": "Mardan Memet",
+  "version": "1.0.1",
+  "author": "Merdan Memet",
   "icons": { "128": "icon.png" },
 
   "browser_action": {
@@ -16,7 +16,9 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "storage"
+    "storage",
+    "http://*/",
+    "https://*/"
   ],
 
   "web_accessible_resources": [

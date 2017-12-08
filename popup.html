@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uy">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Torqolay</title>
@@ -22,13 +22,8 @@
                 <button class="btn-sm" id="uytouly"><strong>ئۇي</strong> <i class="glyphicon glyphicon-arrow-right"></i> ULY</button>
                 <button class="btn-sm" id="ulytouy">ULY <i class="glyphicon glyphicon-arrow-right"></i> <strong>ئۇي</strong></button>
             </div>
-            <!--<div class="pull-right">-->
-                <!--<button id="listBtn" class="btn-link pull-left"><i class="glyphicon glyphicon-th-list"></i></button>-->
-                <!--<button id="save" class="btn-link"><i class="glyphicon glyphicon-plus"></i></button>-->
-            <!--</div>-->
         </div>
     </div>
-    <br>
 
     <div class="row">
         <div class="col-md-12">
@@ -43,28 +38,28 @@
     </div>
 
     <div class="row">
-        <label class="col-md-6"><span class="label label-info" id="fontSizeCounter"></span> خەت چوڭ-كىچىكلىكى</label>
+        <label class="col-md-6" for="fontSize"><span class="label label-info" id="fontSizeCounter"></span> خەت چوڭ-كىچىكلىكى</label>
         <div class="col-md-6">
-            <input type="range" id="fontSize" class="form-control" min="8" max="32" step="1">
+            <input type="range" id="fontSize" min="8" max="32" step="1" class="slider">
         </div>
     </div>
 
     <div class="row">
-        <div class="form-group">
-            <input type="color" name="fontColor" id="fontColor" value="#559EE2">
-            <label for="fontColor">خەت رەڭگى</label>
+        <div class="col-md-12">
+            <input type="color" name="fontColor" id="fontColor" value="#008CBA">
+            <label for="fontColor">خەت  رەڭگى</label>
         </div>
     </div>
 
     <div class="row">
-        <div class="form-group">
-            <input type="color" name="bgColor" id="bgColor" value="#559EE2">
-            <label for="bgColor">تەگلىك رەڭگى</label>
+        <div class="col-md-12">
+            <input type="color" name="bgColor" id="bgColor" value="#008CBA">
+            <label for="bgColor">تەگ رەڭگى</label>
         </div>
     </div>
 
     <div class="row">
-        <div class="form-inline">
+        <div class="col-md-12">
             <input type="checkbox" name="direction" id="direction">
             <label for="direction">ئوڭدىن سولغا</label>
         </div>
