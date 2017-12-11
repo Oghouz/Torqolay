@@ -4,7 +4,7 @@ Google Chrome extension
 
 ## Installation
 
-Install from the **[Chrome Web Store](https://chrome.google.com/webstore/)**.
+Install from the **[Chrome Web Store](https://chrome.google.com/webstore/detail/torqolay/kmpbgnbljnbcgddficmdnckeflinjieo)**.
 
 Not available for **Firefox**,
 
