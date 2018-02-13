@@ -1,4 +1,5 @@
 # <img src="icon.png" alt="Torqolay" width="26"> Torqolay
+[![StyleCI](https://styleci.io/repos/112400685/shield?branch=master)](https://styleci.io/repos/112400685)
 -------------------------------------
 Google Chrome extension
 
